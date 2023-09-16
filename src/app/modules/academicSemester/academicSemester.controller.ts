@@ -37,10 +37,19 @@ const updateAcaSem = async (req: Request, res: Response, next: NextFunction) => 
     next(error);
   }
 };
+const deleteAcaSem = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const result = await AcademicSemesterService.delSemById(req);
+    sendResponse(res, result);
+  } catch (error) {
+    next(error);
+  }
+};
 
 export const AcademicSemesterController = {
   insertIntoDB,
   getAllFromDB,
   getAcaSemById,
-  updateAcaSem
+  updateAcaSem,
+  deleteAcaSem
 };
