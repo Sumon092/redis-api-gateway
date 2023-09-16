@@ -13,7 +13,23 @@ const insertIntoDB = async (req: Request, res: Response, next: NextFunction) => 
 
 const getAllFromDB = async (req: Request, res: Response, next: NextFunction) => {
   try {
-    const result = await AcademicSemesterService.getAllFromDB (req);
+    const result = await AcademicSemesterService.getAllFromDB(req);
+    sendResponse(res, result);
+  } catch (error) {
+    next(error);
+  }
+};
+const getAcaSemById = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const result = await AcademicSemesterService.getAcaSemById(req);
+    sendResponse(res, result);
+  } catch (error) {
+    next(error);
+  }
+};
+const updateAcaSemById = async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const result = await AcademicSemesterService.updateAcaSemById(req);
     sendResponse(res, result);
   } catch (error) {
     next(error);
@@ -22,5 +38,7 @@ const getAllFromDB = async (req: Request, res: Response, next: NextFunction) => 
 
 export const AcademicSemesterController = {
   insertIntoDB,
-  getAllFromDB
+  getAllFromDB,
+  getAcaSemById,
+  updateAcaSemById
 };

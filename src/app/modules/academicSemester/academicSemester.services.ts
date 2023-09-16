@@ -20,8 +20,29 @@ const getAllFromDB = async (req: Request): Promise<IGenericResponse> => {
   });
   return response;
 };
+const getAcaSemById = async (req: Request): Promise<IGenericResponse> => {
+  const { id } = req.params;
+  const response: IGenericResponse = await HttpService.get(`/semester/${id}`, {
+    headers: {
+      Authorization: req.headers.authorization
+    }
+  });
+  return response;
+};
+const updateAcaSemById = async (req: Request): Promise<IGenericResponse> => {
+  const { id } = req.params;
+  console.log('update id');
+  const response: IGenericResponse = await HttpService.patch(`/semester/${id}`, req.body, {
+    headers: {
+      Authorization: req.headers.authorization
+    }
+  });
+  return response;
+};
 
 export const AcademicSemesterService = {
   insertIntoDB,
-  getAllFromDB
+  getAllFromDB,
+  getAcaSemById,
+  updateAcaSemById
 };
