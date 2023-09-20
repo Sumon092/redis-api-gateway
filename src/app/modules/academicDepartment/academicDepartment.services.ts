@@ -3,7 +3,7 @@ import { IGenericResponse } from '../../../interfaces/common';
 import { CoreService as HttpService } from '../../../axios';
 
 const insertIntoDB = async (req: Request): Promise<IGenericResponse> => {
-  const response: IGenericResponse = await HttpService.post(`/academic-departments`, req.body, {
+  const response: IGenericResponse = await HttpService.post(`/academic-departments/create-department`, req.body, {
     headers: {
       Authorization: req.headers.authorization
     }
