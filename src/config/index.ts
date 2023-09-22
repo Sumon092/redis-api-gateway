@@ -24,7 +24,7 @@ export default {
   jwt: {
     secret: envVars.JWT_SECRET
   },
-  redis: {
+  redis: { 
     url: envVars.REDIS_URL
   },
   authServiceUrl: envVars.AUTH_SERVICE_URL,
