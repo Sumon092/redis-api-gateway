@@ -1,8 +1,14 @@
 import { Request, Response, NextFunction } from 'express';
 import { FileUploadHelper } from '../../../helpers/fileUploadHelper';
+import { UserService } from './user.services';
+import sendResponse from '../../../shared/response';
 const createStudent = async (req: Request, res: Response, next: NextFunction) => {
-  // FileUploadHelper.uploadToCloudynary();
-  console.log(req.file, req.data, 'file and data');
+  try {
+    const result = await UserService.createStudent(req);
+    sendResponse(res, result);
+  } catch (error) {
+    next(error);
+  }
 };
 
 export const UserController = { createStudent };

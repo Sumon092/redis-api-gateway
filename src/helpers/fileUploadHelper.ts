@@ -1,4 +1,5 @@
 import { v2 as cloudinary } from 'cloudinary';
+import * as fs from 'fs';
 import multer from 'multer';
 
 cloudinary.config({
@@ -18,14 +19,21 @@ const storage = multer.diskStorage({
 
 const uploads = multer({ storage: storage });
 
-const uploadToCloudynary = async () => {
-  cloudinary.uploader.upload(
-    'https://upload.wikimedia.org/wikipedia/commons/a/ae/Olympic_flag.jpg',
-    { public_id: 'olympic_flag' },
-    function (error, result) {
-      console.log(result);
-    }
-  );
+const uploadToCloudynary = async (file: any) => {
+  return new Promise((resolve, reject) => {
+    cloudinary.uploader.upload(
+      file.path,
+      { public_id: file.originalname },
+      function (error, result) {
+        fs.unlinkSync(file.path);
+        if (error) {
+          reject(error);
+        } else {
+          resolve(result);
+        }
+      }
+    );
+  });
 };
 
 export const FileUploadHelper = { uploadToCloudynary, uploads };
